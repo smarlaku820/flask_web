@@ -1,0 +1,17 @@
+---
+# tasks file for flask_web
+  - name: Install Flask Dependencies
+    pip: 
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - flask
+    - flask-mysql
+  
+  - name: Copy app.py
+    copy:
+      src: app.py
+      dest: /home/debian/app.py
+  
+  - name: Start the web server
+    shell: nohup python3 /home/debian/app.py &
